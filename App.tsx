@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from 'react-native'
 import Navigator from '@navigation/Navigator'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
+import { Provider } from 'react-redux'
+import { store } from '@store/store'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -12,11 +14,7 @@ export default function App() {
     MontserratSemiBold: require('./src/assets/fonts/Montserrat-SemiBold.ttf'),
     MontserratMedium: require('./src/assets/fonts/Montserrat-Medium.ttf'),
   })
-  if (!fontsLoaded) {
-    return <AppLoading />
-  } else {
-    return <Navigator />
-  }
+  return <Provider store={store}>{fontsLoaded ? <Navigator /> : <AppLoading />}</Provider>
 }
 
 const styles = StyleSheet.create({

@@ -6,7 +6,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     padding: 5,
-    width: '30%',
+    flex: 3,
   },
   topContainer: {
     justifyContent: 'space-between',
@@ -17,5 +17,8 @@ export default StyleSheet.create({
   },
   bottomContainer: {
     flex: 1,
+  },
+  errorText: {
+    color: 'red',
   },
 })
