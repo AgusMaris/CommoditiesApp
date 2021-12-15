@@ -15,6 +15,7 @@ module.exports = function (api) {
             '@navigation': './src/navigation/',
             '@hooks': './src/hooks/',
             '@services': './src/services/',
+            '@context': './src/context/',
           },
           extensions: ['.ios.ts', '.android.ts', '.ts', '.ios.tsx', '.android.tsx', '.jsx', '.js', '.json'],
         },

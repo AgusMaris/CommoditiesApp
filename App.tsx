@@ -1,11 +1,10 @@
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
 import Navigator from '@navigation/Navigator'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import { Provider } from 'react-redux'
 import { store } from '@store/store'
+import { SearchContextProvider } from '@context/searchContext'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -14,14 +13,9 @@ export default function App() {
     MontserratSemiBold: require('./src/assets/fonts/Montserrat-SemiBold.ttf'),
     MontserratMedium: require('./src/assets/fonts/Montserrat-Medium.ttf'),
   })
-  return <Provider store={store}>{fontsLoaded ? <Navigator /> : <AppLoading />}</Provider>
+  return (
+    <Provider store={store}>
+      <SearchContextProvider>{fontsLoaded ? <Navigator /> : <AppLoading />}</SearchContextProvider>
+    </Provider>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
