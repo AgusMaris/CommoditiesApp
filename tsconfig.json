@@ -4,11 +4,14 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@screens/*": ["./src/presentation/screens/*"],
-      "@components/*": ["./src/presentation/components/*"],
-      "@presentation/*": ["./src/presentation/*"],
-      "@app/*": ["./src/app/*"],
-      "@infraestructure/*": ["./src/infraestructure/*"]
+      "@screens/*": ["./src/screens/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@components/*": ["./src/components/*"],
+      "@navigation/*": ["./src/navigation/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@store/*": ["./src/store/*"],
+      "@services/*": ["./src/services/*"],
+      "*": ["./src/*"]
     }
   }
 }

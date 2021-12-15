@@ -14,5 +14,12 @@
     "sourceType": "module"
   },
   "plugins": ["react", "react-native", "react-hooks", "@typescript-eslint", "prettier"],
-  "rules": {}
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-debugger": "warn",
+    "no-use-before-define": "off",
+    "spaced-comment": "off",
+    "no-console": "off"
+  }
 }
