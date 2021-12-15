@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { View, Text, TextInput, Button } from 'react-native'
 import { DrawerScreenProps } from '@react-navigation/drawer'
 import { DrawerParamList } from '@navigation/Navigator'
 import globalStyles from 'globalStyles'
 import styles from './CommoditiesScreen.style'
-import { useAppDispatch } from '@hooks/appHooks'
+import { useAppDispatch, useAppSelector } from '@hooks/appHooks'
 import { fetchAsyncCommodities } from '@store/commoditiesSlice'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import { MaterialIcons } from '@expo/vector-icons'
 import colors from '@assets/colors'
 
 type Props = DrawerScreenProps<DrawerParamList, 'Commodities'>
+
+interface CommoditiesRender {
+  name: string
+  values: {
+    year: string
+    value: number
+  }[]
+}
 
 const initialState = {
   start: '',
@@ -21,6 +29,24 @@ const initialState = {
 const CommoditiesScreen = ({ navigation }: Props) => {
   const [state, setState] = useState<typeof initialState>(initialState)
   const dispatch = useAppDispatch()
+  const commodities = useAppSelector((state) => state.commodities)
+  const startInputRef = useRef<TextInput>(null)
+  const endInputRef = useRef<TextInput>(null)
+
+  const commoditiesArr = useMemo(() => {
+    console.log('running memo')
+    const keys: string[] = Object.keys(commodities.commodities)
+    const arr: CommoditiesRender[] = keys.map((key) => {
+      const yearKeys: string[] = Object.keys(commodities.commodities[key])
+      return {
+        name: key,
+        values: yearKeys.map((yearKey) => ({ year: yearKey, value: commodities.commodities[key][yearKey] })),
+      }
+    })
+    console.log(arr)
+    return arr
+  }, [commodities])
+
   useEffect(() => {
     console.log(state)
   }, [state])
@@ -61,6 +87,10 @@ const CommoditiesScreen = ({ navigation }: Props) => {
                 keyboardType="number-pad"
                 onChangeText={(e) => handleNumericChange('start', e)}
                 value={state.start}
+                ref={startInputRef}
+                onSubmitEditing={() => endInputRef.current?.focus()}
+                blurOnSubmit={false}
+                returnKeyType="next"
               />
             </View>
             <View style={{ paddingHorizontal: 30, flexDirection: 'row', alignItems: 'center' }}>
@@ -72,6 +102,7 @@ const CommoditiesScreen = ({ navigation }: Props) => {
                 keyboardType="number-pad"
                 onChangeText={(e) => handleNumericChange('end', e)}
                 value={state.end}
+                ref={endInputRef}
               />
             </View>
           </View>
