@@ -15,6 +15,10 @@ const makeYearRangeArray = (start: string, end: string) => {
   return arr
 }
 
+function roundTwoDec(num: number) {
+  return Math.round(num * 100) / 100
+}
+
 export const fetchAsyncCommodities = createAsyncThunk(
   'commodities/fetchCommodities',
   async ({ start, end }: fetchMoviesParams) => {
@@ -33,8 +37,17 @@ export const fetchAsyncCommodities = createAsyncThunk(
     responses.forEach((record) => {
       obj.commodities[record.fields.commodity] = {
         ...obj.commodities[record.fields.commodity],
-        [record.fields.date.substring(0, record.fields.date.indexOf('-'))]: record.fields.price_index,
+        [record.fields.date.substring(0, record.fields.date.indexOf('-'))]: roundTwoDec(record.fields.price_index),
       }
+    })
+
+    //Agrego los años que faltan como vacios
+    Object.keys(obj.commodities).forEach((commodity) => {
+      const years = Object.keys(obj.commodities[commodity])
+      const missingYears = makeYearRangeArray(start, end).filter((year) => !years.includes(year))
+      missingYears.forEach((year) => {
+        obj.commodities[commodity][year] = null
+      })
     })
 
     console.log(obj)
@@ -45,21 +58,23 @@ export const fetchAsyncCommodities = createAsyncThunk(
 interface Commodities {
   commodities: {
     [name: string]: {
-      [year: string]: number
+      [year: string]: number | null
     }
   }
+  error: string
 }
 
 const initialState: Commodities = {
   commodities: {},
+  error: '',
 }
 
 export const commoditiesSlice = createSlice({
   name: 'commodities',
   initialState,
   reducers: {
-    agregarCommodities: (state, action: PayloadAction<Commodities>) => {
-      state.commodities = action.payload.commodities
+    vaciarListaCommodities: (state) => {
+      state.commodities = {}
     },
   },
   extraReducers: (builder) => {
@@ -70,8 +85,8 @@ export const commoditiesSlice = createSlice({
       console.log('fullfilled')
       return { ...state, commodities: payload.commodities }
     })
-    builder.addCase(fetchAsyncCommodities.rejected, () => {
-      console.log('rejected')
+    builder.addCase(fetchAsyncCommodities.rejected, (state) => {
+      return { ...state, error: 'Server error' }
     })
   },
 })
