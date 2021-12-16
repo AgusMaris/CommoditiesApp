@@ -15,7 +15,8 @@ type Props = DrawerScreenProps<DrawerParamList, 'Commodities'>
 const CommoditiesScreen = ({ navigation }: Props) => {
   const startInputRef = useRef<TextInput>(null)
   const endInputRef = useRef<TextInput>(null)
-  const { start, end, error, commodities, handleDateChange, handleSubmit, isLoading } = useContext(SearchContext)
+  const { start, end, error, commodities, handleDateChange, handleSubmit, isLoading, filterInput, handleFilterChange } =
+    useContext(SearchContext)
 
   return (
     <View style={{ flex: 1 }}>
@@ -27,7 +28,7 @@ const CommoditiesScreen = ({ navigation }: Props) => {
           <Text style={[globalStyles.montserratSemiBold, globalStyles.textL, { textAlign: 'center' }]}>Period</Text>
         </View>
         {error !== '' && <Text style={[globalStyles.montserratMedium, styles.errorText]}>{error}</Text>}
-        <View style={{ flexDirection: 'row', flex: 1 }}>
+        <View style={{ flexDirection: 'row', flex: 2 }}>
           <View style={{ flex: 2, justifyContent: 'space-evenly' }}>
             <View style={{ paddingHorizontal: 30, flexDirection: 'row', alignItems: 'center' }}>
               <View style={{ flex: 2 }}>
@@ -59,14 +60,25 @@ const CommoditiesScreen = ({ navigation }: Props) => {
           </View>
           <View style={{ flex: 1, justifyContent: 'center' }}>
             <TouchableOpacity onPress={handleSubmit}>
-              <MaterialIcons name="arrow-forward-ios" size={30} color={colors.cornowerBlue} />
+              <MaterialIcons name="arrow-forward-ios" size={30} color={colors.carrotOrange} />
             </TouchableOpacity>
           </View>
+        </View>
+        <View style={{ paddingHorizontal: 30, flexDirection: 'row', alignItems: 'center', flex: 1 }}>
+          <View style={{ flex: 2 }}>
+            <Text style={[globalStyles.montserratMedium, globalStyles.textM]}>Commodity:</Text>
+          </View>
+          <TextInput
+            style={[styles.textInput, globalStyles.montserratMedium]}
+            onChangeText={(e) => handleFilterChange(e)}
+            value={filterInput}
+            editable={!isLoading}
+          />
         </View>
       </View>
       <View style={styles.midContainer}>
         {isLoading ? (
-          <Text>Cargando</Text>
+          <ActivityIndicator size="large" color={colors.carrotOrange} style={{ flex: 1, alignSelf: 'center' }} />
         ) : error === '' ? (
           <FlatList
             data={commodities}
@@ -77,7 +89,11 @@ const CommoditiesScreen = ({ navigation }: Props) => {
           <Text>Error: {error}</Text>
         )}
       </View>
-      <View style={styles.bottomContainer}></View>
+      <View style={styles.bottomContainer}>
+        <Text style={[globalStyles.montserratMedium, { textAlign: 'center', color: '#fff' }]}>
+          Agustin Mariscotti - 2021
+        </Text>
+      </View>
     </View>
   )
 }

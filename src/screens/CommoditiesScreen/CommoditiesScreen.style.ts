@@ -1,3 +1,4 @@
+import colors from '@assets/colors'
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
@@ -10,13 +11,15 @@ export default StyleSheet.create({
   },
   topContainer: {
     justifyContent: 'space-between',
-    flex: 3,
+    flex: 4,
   },
   midContainer: {
-    flex: 4,
+    flex: 5,
   },
   bottomContainer: {
     flex: 1,
+    justifyContent: 'center',
+    backgroundColor: colors.carrotOrange,
   },
   errorText: {
     color: 'red',
