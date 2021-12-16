@@ -25,8 +25,9 @@ export const fetchAsyncCommodities = createAsyncThunk(
     const yearArr = makeYearRangeArray(start, end)
     const obj: Commodities = {
       commodities: {},
+      error: '',
+      isLoading: false,
     }
-    console.log(yearArr)
     const responses: IRecord[] = []
     await Promise.all(
       yearArr.map(async (year) => {
@@ -50,7 +51,6 @@ export const fetchAsyncCommodities = createAsyncThunk(
       })
     })
 
-    console.log(obj)
     return obj
   }
 )
@@ -62,11 +62,13 @@ interface Commodities {
     }
   }
   error: string
+  isLoading: boolean
 }
 
 const initialState: Commodities = {
   commodities: {},
   error: '',
+  isLoading: false,
 }
 
 export const commoditiesSlice = createSlice({
@@ -78,19 +80,18 @@ export const commoditiesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAsyncCommodities.pending, () => {
-      console.log('pending')
+    builder.addCase(fetchAsyncCommodities.pending, (state) => {
+      return { ...state, isLoading: true }
     })
     builder.addCase(fetchAsyncCommodities.fulfilled, (state, { payload }) => {
-      console.log('fullfilled')
-      return { ...state, commodities: payload.commodities }
+      return { commodities: payload.commodities, isLoading: false, error: '' }
     })
     builder.addCase(fetchAsyncCommodities.rejected, (state) => {
-      return { ...state, error: 'Server error' }
+      return { ...state, error: 'Server error', isLoading: false }
     })
   },
 })
 
-export const { agregarCommodities } = commoditiesSlice.actions
+export const { vaciarListaCommodities } = commoditiesSlice.actions
 
 export default commoditiesSlice.reducer

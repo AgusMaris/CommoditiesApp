@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@hooks/appHooks'
-import { fetchAsyncCommodities } from '@store/commoditiesSlice'
+import { fetchAsyncCommodities, vaciarListaCommodities } from '@store/commoditiesSlice'
 import React, { createContext, useEffect, useMemo, useState } from 'react'
 
 interface ProviderProps {
@@ -18,17 +18,19 @@ const initialState = {
   start: '',
   end: '',
   error: '',
-  isLoading: false,
+  filterInput: '',
 }
 
 interface SearchContextProps {
   isLoading: boolean
+  filterInput: string
   start: string
   end: string
   error: string
   commodities: CommoditiesRender[]
   handleDateChange: (key: string, value: string) => void
   handleSubmit: () => void
+  handleFilterChange: (value: string) => void
 }
 
 const SearchContext = createContext<SearchContextProps>({} as SearchContextProps)
@@ -36,29 +38,27 @@ export default SearchContext
 
 export const SearchContextProvider = ({ children }: ProviderProps) => {
   const [state, setState] = useState<typeof initialState>(initialState)
-  const { end, error, start, isLoading } = state
+  const { end, error, start, filterInput } = state
   const dispatch = useAppDispatch()
   const commodities = useAppSelector((state) => state.commodities)
   const commoditiesArr = useMemo(() => {
-    console.log('running memo')
     const keys: string[] = Object.keys(commodities.commodities)
-
-    const arr: CommoditiesRender[] = keys.map((key) => {
-      const yearKeys: string[] = Object.keys(commodities.commodities[key])
-      return {
-        name: key,
-        values: yearKeys.map((yearKey) => ({ year: yearKey, value: commodities.commodities[key][yearKey] })),
-      }
-    })
-    console.log(arr)
-    return arr
-  }, [commodities])
+    if (keys.length > 0) {
+      const arr: CommoditiesRender[] = keys.map((key) => {
+        const yearKeys: string[] = Object.keys(commodities.commodities[key])
+        return {
+          name: key,
+          values: yearKeys.map((yearKey) => ({ year: yearKey, value: commodities.commodities[key][yearKey] })),
+        }
+      })
+      return arr.filter((r) => r.name.toLowerCase().includes(filterInput.toLowerCase()))
+    }
+    return []
+  }, [commodities, filterInput])
 
   useEffect(() => {
     if (commodities.error !== '') {
       setState((prevState) => ({ ...prevState, error: commodities.error, isLoading: false }))
-    } else {
-      setState((prevState) => ({ ...prevState, isLoading: false }))
     }
   }, [commodities])
 
@@ -74,12 +74,27 @@ export const SearchContextProvider = ({ children }: ProviderProps) => {
       return
     }
     setState((prev) => ({ ...prev, isLoading: true }))
+    dispatch(vaciarListaCommodities())
     dispatch(fetchAsyncCommodities({ start: state.start, end: state.end }))
+  }
+
+  const handleFilterChange = (value: string) => {
+    setState((prev) => ({ ...prev, filterInput: value }))
   }
 
   return (
     <SearchContext.Provider
-      value={{ start, end, error, handleDateChange, handleSubmit, commodities: commoditiesArr, isLoading }}
+      value={{
+        start,
+        end,
+        error,
+        handleDateChange,
+        handleSubmit,
+        commodities: commoditiesArr,
+        isLoading: commodities.isLoading,
+        filterInput,
+        handleFilterChange,
+      }}
     >
       {children}
     </SearchContext.Provider>
