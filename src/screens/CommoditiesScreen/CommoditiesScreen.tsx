@@ -9,11 +9,11 @@ import { MaterialIcons } from '@expo/vector-icons'
 import colors from '@assets/colors'
 import DropDownCommodity from '@components/DropDownCommodity'
 import SearchContext, { CommoditiesRender } from '@context/searchContext'
+import MyInputComponent from '@components/MyInputComponent'
 
 type Props = DrawerScreenProps<DrawerParamList, 'Commodities'>
 
 const CommoditiesScreen = ({ navigation }: Props) => {
-  const startInputRef = useRef<TextInput>(null)
   const endInputRef = useRef<TextInput>(null)
   const { start, end, error, commodities, handleDateChange, handleSubmit, isLoading, filterInput, handleFilterChange } =
     useContext(SearchContext)
@@ -31,33 +31,22 @@ const CommoditiesScreen = ({ navigation }: Props) => {
         </View>
         <View style={styles.datesContainer}>
           <View style={styles.datesInputsContainer}>
-            <View style={styles.textInputContainer}>
-              <View style={{ flex: 2 }}>
-                <Text style={[globalStyles.montserratMedium, globalStyles.textM]}>Start:</Text>
-              </View>
-              <TextInput
-                style={[styles.textInput, globalStyles.montserratMedium]}
-                keyboardType="number-pad"
-                onChangeText={(e) => handleDateChange('start', e)}
-                value={start}
-                ref={startInputRef}
-                onSubmitEditing={() => endInputRef.current?.focus()}
-                blurOnSubmit={false}
-                returnKeyType="next"
-              />
-            </View>
-            <View style={styles.textInputContainer}>
-              <View style={{ flex: 2 }}>
-                <Text style={[globalStyles.montserratMedium, globalStyles.textM]}>End:</Text>
-              </View>
-              <TextInput
-                style={[styles.textInput, globalStyles.montserratMedium]}
-                keyboardType="number-pad"
-                onChangeText={(e) => handleDateChange('end', e)}
-                value={end}
-                ref={endInputRef}
-              />
-            </View>
+            <MyInputComponent
+              inputField="start"
+              onChangeText={(e) => handleDateChange('start', e)}
+              value={start}
+              blurOnSubmit={false}
+              keyboardType="numeric"
+              onSubmitEditing={() => endInputRef.current?.focus()}
+              returnKeyType="next"
+            />
+            <MyInputComponent
+              inputField="end"
+              onChangeText={(e) => handleDateChange('end', e)}
+              value={end}
+              keyboardType="numeric"
+              innerRef={endInputRef}
+            />
           </View>
           <View style={styles.searchButtonContainer}>
             <TouchableOpacity onPress={handleSubmit}>
@@ -65,17 +54,12 @@ const CommoditiesScreen = ({ navigation }: Props) => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={[styles.textInputContainer, { flex: 1 }]}>
-          <View style={{ flex: 2 }}>
-            <Text style={[globalStyles.montserratMedium, globalStyles.textM]}>Commodity:</Text>
-          </View>
-          <TextInput
-            style={[styles.textInput, globalStyles.montserratMedium]}
-            onChangeText={(e) => handleFilterChange(e)}
-            value={filterInput}
-            editable={!isLoading}
-          />
-        </View>
+        <MyInputComponent
+          value={filterInput}
+          inputField="filter"
+          onChangeText={handleFilterChange}
+          editable={!isLoading}
+        />
       </View>
       <View style={styles.midContainer}>
         {isLoading ? (

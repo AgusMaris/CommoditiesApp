@@ -5,13 +5,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
-  textInput: {
-    borderColor: '#aaa',
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 5,
-    flex: 3,
-  },
+
   topContainer: {
     justifyContent: 'space-between',
     flex: 4,
@@ -24,11 +18,7 @@ export default StyleSheet.create({
     flex: 2,
     justifyContent: 'space-evenly',
   },
-  textInputContainer: {
-    paddingHorizontal: 30,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+
   searchButtonContainer: {
     flex: 1,
     justifyContent: 'center',
