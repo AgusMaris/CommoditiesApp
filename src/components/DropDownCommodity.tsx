@@ -18,15 +18,8 @@ const DropDownCommodity = ({ commodity, index }: Props) => {
     <View style={styles.commodityContainer}>
       <TouchableOpacity style={styles.commodityNameContainer} onPress={() => toggleSelected(!isSelected)}>
         <View style={{ flex: 9, flexDirection: 'row', alignItems: 'center' }}>
-          <View
-            style={[
-              styles.enumCircle,
-              {
-                backgroundColor: index % 2 === 0 ? colors.carrotOrange : colors.carolinaBlue,
-              },
-            ]}
-          ></View>
-          <Text style={[globalStyles.montserratSemiBold, globalStyles.textM, { paddingLeft: 10 }]}>
+          <View style={styles.enumCircle}></View>
+          <Text style={[globalStyles.montserratSemiBold, globalStyles.textM, { paddingHorizontal: 10 }]}>
             {commodity.name}
           </Text>
         </View>
@@ -40,12 +33,7 @@ const DropDownCommodity = ({ commodity, index }: Props) => {
       </TouchableOpacity>
       {isSelected && (
         <>
-          <View
-            style={[
-              styles.tableHeader,
-              { borderBottomColor: index % 2 === 0 ? colors.carrotOrange : colors.carolinaBlue },
-            ]}
-          >
+          <View style={styles.tableHeader}>
             <View style={styles.tableColumn}>
               <Text style={[globalStyles.montserratRegular, globalStyles.textM]}>Year</Text>
             </View>

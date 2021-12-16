@@ -11,7 +11,7 @@ export default StyleSheet.create({
     borderRadius: 100,
   },
   topContainer: {
-    flex: 8,
+    height: '75%',
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
@@ -30,6 +30,7 @@ export default StyleSheet.create({
     fontSize: 20,
   },
   imgContainer: {
+    marginTop: '25%',
     height: 200,
     width: 200,
   },

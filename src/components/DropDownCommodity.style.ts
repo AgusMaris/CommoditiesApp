@@ -20,7 +20,6 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   commodityNameContainer: {
-    /* backgroundColor: colors.lightCyan, */
     justifyContent: 'space-between',
     flexDirection: 'row',
     padding: 5,
@@ -31,5 +30,6 @@ export default StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
+    backgroundColor: colors.carrotOrange,
   },
 })
