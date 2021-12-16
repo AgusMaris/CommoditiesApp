@@ -5,7 +5,6 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import styles from './DropDownCommodity.style'
 import { MaterialIcons } from '@expo/vector-icons'
 import { CommoditiesRender } from '@context/searchContext'
-import colors from '@assets/colors'
 
 interface Props {
   commodity: CommoditiesRender
@@ -25,9 +24,9 @@ const DropDownCommodity = ({ commodity, index }: Props) => {
         </View>
         <View style={{ flex: 1 }}>
           {isSelected ? (
-            <MaterialIcons name="keyboard-arrow-up" /* color={'#fff'} */ size={30} />
+            <MaterialIcons name="keyboard-arrow-up" size={30} />
           ) : (
-            <MaterialIcons name="keyboard-arrow-down" /* color={'#fff'} */ size={30} />
+            <MaterialIcons name="keyboard-arrow-down" size={30} />
           )}
         </View>
       </TouchableOpacity>
