@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  container: { height: '75%', alignItems: 'center', justifyContent: 'space-evenly' },
+  container: { flex: 8, alignItems: 'center', justifyContent: 'space-evenly' },
   textBold: {
     fontFamily: 'MontserratBold',
     fontSize: 25,
