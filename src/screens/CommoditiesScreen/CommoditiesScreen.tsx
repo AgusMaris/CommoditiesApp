@@ -19,18 +19,19 @@ const CommoditiesScreen = ({ navigation }: Props) => {
     useContext(SearchContext)
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <View style={styles.topContainer}>
         <View>
-          <Text style={[globalStyles.montserratBold, globalStyles.textXL, { textAlign: 'center' }]}>
+          <Text style={[globalStyles.montserratBold, globalStyles.textXL, globalStyles.textAlignCenter]}>
             Commodity price
           </Text>
-          <Text style={[globalStyles.montserratSemiBold, globalStyles.textL, { textAlign: 'center' }]}>Period</Text>
+          <Text style={[globalStyles.montserratSemiBold, globalStyles.textL, globalStyles.textAlignCenter]}>
+            Period
+          </Text>
         </View>
-        {error !== '' && <Text style={[globalStyles.montserratMedium, styles.errorText]}>{error}</Text>}
-        <View style={{ flexDirection: 'row', flex: 2 }}>
-          <View style={{ flex: 2, justifyContent: 'space-evenly' }}>
-            <View style={{ paddingHorizontal: 30, flexDirection: 'row', alignItems: 'center' }}>
+        <View style={styles.datesContainer}>
+          <View style={styles.datesInputsContainer}>
+            <View style={styles.textInputContainer}>
               <View style={{ flex: 2 }}>
                 <Text style={[globalStyles.montserratMedium, globalStyles.textM]}>Start:</Text>
               </View>
@@ -45,7 +46,7 @@ const CommoditiesScreen = ({ navigation }: Props) => {
                 returnKeyType="next"
               />
             </View>
-            <View style={{ paddingHorizontal: 30, flexDirection: 'row', alignItems: 'center' }}>
+            <View style={styles.textInputContainer}>
               <View style={{ flex: 2 }}>
                 <Text style={[globalStyles.montserratMedium, globalStyles.textM]}>End:</Text>
               </View>
@@ -58,13 +59,13 @@ const CommoditiesScreen = ({ navigation }: Props) => {
               />
             </View>
           </View>
-          <View style={{ flex: 1, justifyContent: 'center' }}>
+          <View style={styles.searchButtonContainer}>
             <TouchableOpacity onPress={handleSubmit}>
               <MaterialIcons name="arrow-forward-ios" size={30} color={colors.carrotOrange} />
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{ paddingHorizontal: 30, flexDirection: 'row', alignItems: 'center', flex: 1 }}>
+        <View style={[styles.textInputContainer, { flex: 1 }]}>
           <View style={{ flex: 2 }}>
             <Text style={[globalStyles.montserratMedium, globalStyles.textM]}>Commodity:</Text>
           </View>
@@ -86,11 +87,11 @@ const CommoditiesScreen = ({ navigation }: Props) => {
             renderItem={({ item, index }) => <DropDownCommodity index={index} commodity={item} />}
           />
         ) : (
-          <Text>Error: {error}</Text>
+          <Text style={[globalStyles.montserratMedium, styles.errorText]}>{error}</Text>
         )}
       </View>
       <View style={styles.bottomContainer}>
-        <Text style={[globalStyles.montserratMedium, { textAlign: 'center', color: '#fff' }]}>
+        <Text style={[globalStyles.montserratMedium, globalStyles.textAlignCenter, globalStyles.textWhite]}>
           Agustin Mariscotti - 2021
         </Text>
       </View>

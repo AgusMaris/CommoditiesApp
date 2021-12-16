@@ -1,7 +1,20 @@
+import colors from '@assets/colors'
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  container: { flex: 8, alignItems: 'center', justifyContent: 'space-evenly' },
+  container: {
+    flex: 1,
+  },
+  profileImage: {
+    height: '100%',
+    width: '100%',
+    borderRadius: 100,
+  },
+  topContainer: {
+    flex: 8,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
   textBold: {
     fontFamily: 'MontserratBold',
     fontSize: 25,
@@ -27,5 +40,11 @@ export default StyleSheet.create({
   },
   textRegular: {
     fontFamily: 'MontserratRegular',
+  },
+  bottomContainer: {
+    flex: 2,
+    backgroundColor: colors.carrotOrange,
+    borderTopRightRadius: 50,
+    borderTopLeftRadius: 50,
   },
 })

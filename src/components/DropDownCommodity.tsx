@@ -14,10 +14,12 @@ interface Props {
 const DropDownCommodity = ({ commodity, index }: Props) => {
   const [isSelected, toggleSelected] = useState(false)
   return (
-    <View style={{ marginBottom: 1 }}>
-      <TouchableOpacity style={[styles.commodityNameContainer]} onPress={() => toggleSelected(!isSelected)}>
+    <View style={styles.commodityContainer}>
+      <TouchableOpacity style={styles.commodityNameContainer} onPress={() => toggleSelected(!isSelected)}>
         <View style={{ flex: 9 }}>
-          <Text style={[globalStyles.montserratSemiBold, globalStyles.textM, { color: '#fff' }]}>{commodity.name}</Text>
+          <Text style={[globalStyles.montserratSemiBold, globalStyles.textM, globalStyles.textWhite]}>
+            {commodity.name}
+          </Text>
         </View>
         <View style={{ flex: 1 }}>
           {isSelected ? (

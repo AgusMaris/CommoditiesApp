@@ -66,14 +66,14 @@ export const SearchContextProvider = ({ children }: ProviderProps) => {
     if (isNaN(+value) || value.indexOf('.') !== -1 || value.indexOf(' ') !== -1) {
       return
     }
-    setState((prev) => ({ ...prev, [key]: value, error: '' }))
+    setState((prev) => ({ ...prev, [key]: value }))
   }
   const handleSubmit = () => {
     if (+start > +end) {
       setState((prev) => ({ ...prev, error: 'End date must be greater than start date' }))
       return
     }
-    setState((prev) => ({ ...prev, isLoading: true }))
+    setState((prev) => ({ ...prev, isLoading: true, error: '' }))
     dispatch(vaciarListaCommodities())
     dispatch(fetchAsyncCommodities({ start: state.start, end: state.end }))
   }

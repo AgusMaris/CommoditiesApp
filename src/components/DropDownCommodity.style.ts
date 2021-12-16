@@ -2,8 +2,11 @@ import colors from '@assets/colors'
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
+  commodityContainer: {
+    marginBottom: 1,
+  },
   tableHeader: {
-    borderBottomColor: '#279AF1',
+    borderBottomColor: colors.carolinaBlue,
     borderBottomWidth: 2,
     flexDirection: 'row',
   },
@@ -15,7 +18,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   commodityNameContainer: {
-    backgroundColor: '#279AF1',
+    backgroundColor: colors.carolinaBlue,
     justifyContent: 'space-between',
     flexDirection: 'row',
     padding: 5,
