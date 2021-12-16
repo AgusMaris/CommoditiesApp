@@ -15,16 +15,18 @@ const DropDownCommodity = ({ commodity, index }: Props) => {
   const [isSelected, toggleSelected] = useState(false)
   return (
     <View style={{ marginBottom: 1 }}>
-      <View style={[styles.commodityNameContainer]}>
-        <Text style={[globalStyles.montserratSemiBold, globalStyles.textL, { color: '#fff' }]}>{commodity.name}</Text>
-        <TouchableOpacity onPress={() => toggleSelected(!isSelected)}>
+      <TouchableOpacity style={[styles.commodityNameContainer]} onPress={() => toggleSelected(!isSelected)}>
+        <View style={{ flex: 9 }}>
+          <Text style={[globalStyles.montserratSemiBold, globalStyles.textM, { color: '#fff' }]}>{commodity.name}</Text>
+        </View>
+        <View style={{ flex: 1 }}>
           {isSelected ? (
             <MaterialIcons name="keyboard-arrow-up" color={'#fff'} size={30} />
           ) : (
             <MaterialIcons name="keyboard-arrow-down" color={'#fff'} size={30} />
           )}
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
       {isSelected && (
         <>
           <View style={styles.tableHeader}>

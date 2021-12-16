@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   tableHeader: {
-    borderBottomColor: colors.cornowerBlue,
-    borderBottomWidth: 1,
+    borderBottomColor: '#279AF1',
+    borderBottomWidth: 2,
     flexDirection: 'row',
   },
   tableRow: {
@@ -15,10 +15,11 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   commodityNameContainer: {
-    backgroundColor: colors.carrotOrange,
+    backgroundColor: '#279AF1',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingHorizontal: '10%',
+    padding: 5,
+
     alignItems: 'center',
   },
 })
