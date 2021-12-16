@@ -6,13 +6,13 @@ Incorpora un filtro extra para buscar/filtrar commodities por nombre
 
 ### Home:
 
-![Imgur](https://i.imgur.com/ruFEPgS.jpg)
+![Imgur](https://i.imgur.com/pRYT1yH.jpg)
 
 
 ### Navegacion:
 
-![Imgur](https://i.imgur.com/Os14oyo.jpg)
+![Imgur](https://i.imgur.com/Hc7jz9D.jpg)
 
 ### Commodities Price:
 
-![Imgur](https://i.imgur.com/NJUbewq.jpg)
+![Imgur](https://i.imgur.com/2qx0EGM.jpg)
