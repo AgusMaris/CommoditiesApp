@@ -18,6 +18,7 @@ const HomeScreen = ({ navigation }: Props) => {
         <Text style={[styles.textMedium]}>Based in La Plata, AR</Text>
         <Text style={[styles.textRegular, styles.emailText]}>agustinm06@gmail.com</Text>
       </View>
+      <View style={{ flex: 2 }}></View>
       <View style={styles.bottomContainer}></View>
     </View>
   )

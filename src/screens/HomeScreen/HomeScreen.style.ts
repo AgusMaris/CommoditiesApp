@@ -42,9 +42,9 @@ export default StyleSheet.create({
     fontFamily: 'MontserratRegular',
   },
   bottomContainer: {
-    flex: 2,
+    flex: 1,
     backgroundColor: colors.carrotOrange,
-    borderTopRightRadius: 50,
-    borderTopLeftRadius: 50,
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
   },
 })

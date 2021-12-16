@@ -4,6 +4,8 @@ import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
   commodityContainer: {
     marginBottom: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
   },
   tableHeader: {
     borderBottomColor: colors.carolinaBlue,
@@ -18,11 +20,16 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   commodityNameContainer: {
-    backgroundColor: colors.carolinaBlue,
+    /* backgroundColor: colors.lightCyan, */
     justifyContent: 'space-between',
     flexDirection: 'row',
     padding: 5,
 
     alignItems: 'center',
+  },
+  enumCircle: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
   },
 })

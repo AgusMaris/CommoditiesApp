@@ -39,7 +39,7 @@ export default StyleSheet.create({
   bottomContainer: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: colors.carrotOrange,
+    backgroundColor: colors.cornowerBlue,
   },
   errorText: {
     color: 'red',

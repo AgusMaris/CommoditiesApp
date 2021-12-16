@@ -82,6 +82,7 @@ const CommoditiesScreen = ({ navigation }: Props) => {
           <ActivityIndicator size="large" color={colors.carrotOrange} style={{ flex: 1, alignSelf: 'center' }} />
         ) : error === '' ? (
           <FlatList
+            overScrollMode="never"
             data={commodities}
             keyExtractor={(item: CommoditiesRender) => item.name}
             renderItem={({ item, index }) => <DropDownCommodity index={index} commodity={item} />}
